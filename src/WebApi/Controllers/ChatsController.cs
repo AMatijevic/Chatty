@@ -8,6 +8,10 @@ namespace Chatty.WebApi.Controllers
 {
     public class ChatsController : ApiController
     {
+        /// <summary>
+        /// Getting all chats from DB
+        /// </summary>
+        /// <returns>List of chat dto-s</returns>
         [HttpGet]
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         public async Task<ActionResult<IEnumerable<ChatDto>>> Get()

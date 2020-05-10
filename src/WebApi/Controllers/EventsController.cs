@@ -8,6 +8,12 @@ namespace Chatty.WebApi.Controllers
 {
     public class EventsController : ApiController
     {
+        /// <summary>
+        /// Getting all events from DB
+        /// </summary>
+        /// <param name="aggregationType">minute, hour, day default is minute</param>
+        /// <param name="aggregationValue">any integer</param>
+        /// <returns>Returns list of eventViewModel aggregated by type and value</returns>
         [HttpGet]
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         public async Task<ActionResult<EventsVm>> Get(
@@ -21,6 +27,12 @@ namespace Chatty.WebApi.Controllers
             }).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Getting all events from DB by existing chat id
+        /// </summary>
+        /// <param name="aggregationType">minute, hour, day default is minute</param>
+        /// <param name="aggregationValue">any integer</param>
+        /// <returns>Returns list of eventViewModel aggregated by type and value</returns>
         [HttpGet("{chatId}")]
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         public async Task<ActionResult<EventsVm>> Get(
