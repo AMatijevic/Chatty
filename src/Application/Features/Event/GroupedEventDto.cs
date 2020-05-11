@@ -20,7 +20,7 @@ namespace Chatty.Application.Features.Event
                 _ => throw new NotImplementedException()
             };
 
-            return NumberOfPersons.HasValue ?
+            return NumberOfPersons.HasValue && Type == EventType.HighFiveAnotherUser ?
                 $"1 {text} {NumberOfPersons} other people"
                 : $"{NumberOfOccurrences} {text}";
         }

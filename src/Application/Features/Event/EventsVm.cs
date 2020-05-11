@@ -36,15 +36,15 @@ namespace Chatty.Application.Features.Event
                             .ToDictionary(k => k.Key.UserNickname, v => v.Count())
                             .Select(n => new GroupedEventDto { Type = Domain.Enums.EventType.HighFiveAnotherUser, NumberOfPersons = n.Value });
 
-                            var groupedEventInfo = v.Value
+                            var groupedEventsInfo = v.Value
                             .GroupBy(t => t.Type)
                             .Select(b => new GroupedEventDto { Type = b.Key, NumberOfOccurrences = b.Count() })
                             .Where(t => t.Type != Domain.Enums.EventType.HighFiveAnotherUser)
                             .ToList();
 
-                            groupedEventInfo.AddRange(numberOfHighFivesPerPerson);
+                            groupedEventsInfo.AddRange(numberOfHighFivesPerPerson);
 
-                            return groupedEventInfo;
+                            return groupedEventsInfo.OrderBy(e => (int)e.Type);
                         })
                     .Select(item => new EventVm(item.Key, item.Value.Select(e => e.ToString())));
             }

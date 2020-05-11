@@ -4,7 +4,7 @@
     {
         EnterTheRoom = 1,
         LeveTheRoom = 2,
-        Comment = 3,
-        HighFiveAnotherUser = 4
+        HighFiveAnotherUser = 3,
+        Comment = 4,
     }
 }
