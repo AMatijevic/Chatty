@@ -28,7 +28,24 @@ namespace Chatty.Application.Features.Event
                 //Grouped ViewModel
                 events = items.ToDictionary(
                         k => k.Key,
-                        v => v.Value.GroupBy(t => t.Type).Select(b => new GroupedEventDto { Type = b.Key, NumberOfOccurrences = b.Count() }))
+                        v =>
+                        {
+                            var numberOfHighFivesPerPerson = v.Value
+                            .Where(h => h.Type == Domain.Enums.EventType.HighFiveAnotherUser)
+                            .GroupBy(b => new { b.UserNickname, b.Type })
+                            .ToDictionary(k => k.Key.UserNickname, v => v.Count())
+                            .Select(n => new GroupedEventDto { Type = Domain.Enums.EventType.HighFiveAnotherUser, NumberOfPersons = n.Value });
+
+                            var groupedEventInfo = v.Value
+                            .GroupBy(t => t.Type)
+                            .Select(b => new GroupedEventDto { Type = b.Key, NumberOfOccurrences = b.Count() })
+                            .Where(t => t.Type != Domain.Enums.EventType.HighFiveAnotherUser)
+                            .ToList();
+
+                            groupedEventInfo.AddRange(numberOfHighFivesPerPerson);
+
+                            return groupedEventInfo;
+                        })
                     .Select(item => new EventVm(item.Key, item.Value.Select(e => e.ToString())));
             }
             else

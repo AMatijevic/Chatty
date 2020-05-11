@@ -102,7 +102,7 @@ namespace Chatty.Application.IntegrationTests
                 httpResponse.Events.First().Occurrence.Should().BeSameDateAs(new DateTime(2020, 5, 9, 4, 30, 0));
                 httpResponse.Events.First().Events.Should().HaveCount(4);
                 httpResponse.Events.First().Events.First().Should().Contain("2 people entered");
-                httpResponse.Events.First().Events.Last().Should().Contain("2 left");
+                httpResponse.Events.First().Events.Last().Should().Contain("1 person high-fives 1 other people");
 
                 httpResponse.Events.Last().Occurrence.Should().BeSameDateAs(new DateTime(2020, 5, 10, 4, 30, 0));
                 httpResponse.Events.Last().Events.Should().HaveCount(1);
@@ -116,14 +116,14 @@ namespace Chatty.Application.IntegrationTests
                 httpResponse.Should().NotBeNull();
                 httpResponse.Events.Should().HaveCount(2);
                 httpResponse.Events.First().Occurrence.Should().BeSameDateAs(new DateTime(2020, 5, 9, 0, 0, 0));
-                httpResponse.Events.First().Events.Should().HaveCount(4);
+                httpResponse.Events.First().Events.Should().HaveCount(5);
                 httpResponse.Events.First().Events.First().Should().Contain("5 people entered");
-                httpResponse.Events.First().Events.Last().Should().Contain("5 left");
+                httpResponse.Events.First().Events.Last().Should().Contain("1 person high-fives 2 other people");
 
                 httpResponse.Events.Last().Occurrence.Should().BeSameDateAs(new DateTime(2020, 5, 10, 0, 0, 0));
-                httpResponse.Events.Last().Events.Should().HaveCount(4);
+                httpResponse.Events.Last().Events.Should().HaveCount(5);
                 httpResponse.Events.Last().Events.First().Should().Contain("3 people entered");
-                httpResponse.Events.Last().Events.Last().Should().Contain("3 left");
+                httpResponse.Events.Last().Events.Last().Should().Contain("1 person high-fives 2 other people");
             }
 
             [Fact]

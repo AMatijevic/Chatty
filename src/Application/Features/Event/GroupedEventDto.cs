@@ -7,6 +7,7 @@ namespace Chatty.Application.Features.Event
     {
         public EventType Type { get; set; }
         public int NumberOfOccurrences { get; set; }
+        public int? NumberOfPersons { get; set; }
 
         public override string ToString()
         {
@@ -19,7 +20,9 @@ namespace Chatty.Application.Features.Event
                 _ => throw new NotImplementedException()
             };
 
-            return $"{NumberOfOccurrences} {text}";
+            return NumberOfPersons.HasValue ?
+                $"1 {text} {NumberOfPersons} other people"
+                : $"{NumberOfOccurrences} {text}";
         }
     }
 }
