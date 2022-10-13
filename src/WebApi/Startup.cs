@@ -38,7 +38,7 @@ namespace Chatty.WebApi
                 .AddDbContextCheck<ApplicationDbContext>();
 
             services.AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); ;
+                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); 
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
